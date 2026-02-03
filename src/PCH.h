@@ -45,7 +45,8 @@ namespace stl
             Patch(std::uintptr_t a_originalFuncAddr, std::size_t a_originalByteLength)
             {
                 // Hook returns here. Execute the restored bytes and jump back to the original function.
-                for (size_t i = 0; i < a_originalByteLength; ++i) {
+                for (size_t i = 0; i < a_originalByteLength; ++i)
+                {
                     db(*reinterpret_cast<std::uint8_t*>(a_originalFuncAddr + i));
                 }
 
@@ -72,9 +73,8 @@ namespace stl
             std::views::iota(
                 std::to_underlying(first),
                 std::to_underlying(last)) |
-            std::views::transform([](auto enum_val) {
-                return (decltype(first))enum_val;
-            });
+            std::views::transform([](auto enum_val)
+                { return (decltype(first))enum_val; });
 
         return enum_range;
     };

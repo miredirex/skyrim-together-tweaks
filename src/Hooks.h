@@ -2,5 +2,6 @@
 
 namespace Hooks
 {
+    void InstallPreloadHooks();
     void Install();
 }

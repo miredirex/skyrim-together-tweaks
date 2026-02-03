@@ -24,26 +24,8 @@ AlwaysBreakTemplateDeclarations: 'Yes'
 BinPackArguments: 'true'
 BinPackParameters: 'true'
 BitFieldColonSpacing: After
-BraceWrapping:
-    AfterCaseLabel: 'true'
-    AfterClass: 'true'
-    AfterControlStatement: 'false'
-    AfterEnum: 'true'
-    AfterFunction: 'true'
-    AfterNamespace: 'true'
-    AfterStruct: 'true'
-    AfterUnion: 'true'
-    AfterExternBlock: 'true'
-    BeforeCatch: 'false'
-    BeforeElse: 'false'
-    BeforeLambdaBody: 'false'
-    BeforeWhile: 'false'
-    IndentBraces: 'false'
-    SplitEmptyFunction: 'false'
-    SplitEmptyRecord: 'false'
-    SplitEmptyNamespace: 'false'
 BreakBeforeBinaryOperators: None
-BreakBeforeBraces: Custom
+BreakBeforeBraces: Allman
 BreakBeforeTernaryOperators: 'false'
 BreakConstructorInitializers: AfterColon
 BreakInheritanceList: AfterColon
@@ -86,7 +68,6 @@ SpaceBeforeRangeBasedForLoopColon: 'true'
 SpaceBeforeSquareBrackets: 'false'
 SpaceInEmptyBlock: 'false'
 SpaceInEmptyParentheses: 'false'
-SpacesBeforeTrailingComments: 2
 SpacesInAngles: 'false'
 SpacesInCStyleCastParentheses: 'false'
 SpacesInConditionalStatement: 'false'

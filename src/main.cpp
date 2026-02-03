@@ -1,11 +1,15 @@
 #include "Hooks.h"
+#include <iostream>
+
+bool g_preloaded = false;
 
 void OnInit(SKSE::MessagingInterface::Message* a_msg)
 {
-    switch (a_msg->type) {
+    switch (a_msg->type)
+    {
     case SKSE::MessagingInterface::kPostLoad:
         {
-            Hooks::Install();
+            spdlog::info("kPostLoad message");
         }
         break;
     default:
@@ -13,10 +17,11 @@ void OnInit(SKSE::MessagingInterface::Message* a_msg)
     }
 }
 
-extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []() {
+extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
+{
     SKSE::PluginVersionData v;
-    v.PluginVersion(Version::MAJOR);
-    v.PluginName("SkyrimTogetherTweaks");
+    v.PluginVersion({ Version::MAJOR, Version::MINOR, Version::PATCH });
+    v.PluginName(Version::PROJECT);
     v.AuthorName("miredirex");
     v.UsesAddressLibrary();
     v.UsesUpdatedStructs();
@@ -28,7 +33,8 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []() {
 void InitializeLog()
 {
     auto path = logger::log_directory();
-    if (!path) {
+    if (!path)
+    {
         stl::report_and_fail("Failed to find standard logging directory"sv);
     }
 
@@ -47,18 +53,60 @@ void InitializeLog()
     logger::info(FMT_STRING("{} v{}"), Version::PROJECT, Version::NAME);
 }
 
+static void AllocSkyrimTogetherConsole()
+{
+    if (AllocConsole())
+    {
+        FILE* file = nullptr;
+        freopen_s(&file, "CONOUT$", "w", stdout);
+        assert(file != nullptr);
+        SetConsoleTitleA("Skyrim Together Console");
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+    }
+}
+
+extern "C" __declspec(dllexport) void __stdcall Initialize()
+{
+    if (false /*true*/) // TODO: TOML setting `bEnableConsole`, and TODO: check if ST in release mode
+    {
+        AllocSkyrimTogetherConsole();
+    }
+
+    InitializeLog();
+    logger::info("SkyrimTogetherTweaks v{}.{}.{} PreLoad"sv, Version::MAJOR, Version::MINOR, Version::PATCH);
+
+    auto& trampoline = SKSE::GetTrampoline();
+    trampoline.create(1 << 7, reinterpret_cast<void*>(0x18FFFFFFF)); // "displacement is out of range" if I don't provide `0x18FFFFFFF`
+    Hooks::InstallPreloadHooks();
+
+    g_preloaded = true;
+}
+
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
-    InitializeLog();
+#if 0
+    if (!g_preloaded)
+    {
+        std::wostringstream messageBoxText;
+        messageBoxText << L"ERROR: Skyrim Together Tweaks did not pre-load. Please verify the installation of d3dx9_42.dll from the Engine Fixes' Part 2. This file must reside in the main game folder alongside SkyrimSE.exe, or be properly installed with your mod manager's root folder functionality.\r\n"sv;
+        messageBoxText << L"Skyrim will now close.";
+        REX::W32::MessageBoxW(nullptr, messageBoxText.str().c_str(), L"Skyrim Together Tweaks", MB_OK);
 
-    logger::info("Game version : {}", a_skse->RuntimeVersion().string());
+        spdlog::default_logger()->flush();
+        ::TerminateProcess(::GetCurrentProcess(), EXIT_SUCCESS);
 
-    SKSE::Init(a_skse, false);
+        return false;
+    }
+#endif
 
-    SKSE::AllocTrampoline(1 << 7);
+    // InitializeLog();
 
-    const auto messaging = SKSE::GetMessagingInterface();
-    messaging->RegisterListener("SKSE", OnInit);
+    // SKSE::Init(a_skse, false);
+    // SKSE::AllocTrampoline(1 << 7);
+    (void*)a_skse;
+
+    // const auto messaging = SKSE::GetMessagingInterface();
+    // messaging->RegisterListener("SKSE", OnInit);
 
     return true;
 }

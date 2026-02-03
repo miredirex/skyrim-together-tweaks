@@ -23,7 +23,7 @@ cmake --build buildae --config Release
 ## Credits
 - [Skyrim Together](https://github.com/tiltedphoques/TiltedEvolution) for the legendary co-op mod
 - [powerof3](https://github.com/powerof3) for the SKSE plugin template
-- xSE RE community for their reverse engineering efforts
+- **xSE RE** community for their reverse engineering efforts
 
 ## License
 [MIT](LICENSE)
