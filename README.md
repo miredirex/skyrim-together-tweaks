@@ -1,6 +1,6 @@
 # Skyrim Together Tweaks
 
-SKSE companion plugin for Skyrim Together that provides various tweaks and utilities for the mod
+SKSE companion plugin for Skyrim Together that provides various tweaks and utilities
 
 Nexus Mods page: https://www.nexusmods.com/skyrimspecialedition/mods/135782
 

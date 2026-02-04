@@ -48,6 +48,7 @@ IndentGotoLabels: 'false'
 IndentPPDirectives: AfterHash
 IndentWidth: 4
 IndentWrappedFunctionNames: 'true'
+InsertNewlineAtEOF: true
 KeepEmptyLinesAtTheStartOfBlocks: 'false'
 Language: Cpp
 MaxEmptyLinesToKeep: 1

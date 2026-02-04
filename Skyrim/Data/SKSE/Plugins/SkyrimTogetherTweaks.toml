@@ -8,6 +8,6 @@ bEnableConsole = false        # enables the console where Skyrim Together prints
 bDisableRCtrl = false         # disables Right Ctrl button from activating the UI menu
 
 [Experiments]
-uInterpolationBufferMs = 300  # adjusts the so called "artificial delay". tweaking this may result in a more responsive player movement (that is if you know what you're doing). try experimenting with lower values e.g. 120-150, especially if you're on LAN
+uInterpolationBufferMs = 300  # adjusts the so called "artificial delay". tweaking this may result in a more responsive player movement - that is if you know what you're doing. try experimenting with lower values e.g. 120-150, especially if you're on LAN
 bNoAnimationDelay = false     # enforces instant animations, meaning no artificial delays. works best with lower 'uInterpolationBufferMs'
 bMobsAggroMultiplier = 1.0    # makes enemies more attracted to you in combat (1.0 is default); set to 1.5-2.0 for more fun
