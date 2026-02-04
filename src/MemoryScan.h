@@ -9,6 +9,5 @@ namespace memscan
         const std::string_view DllBlocklist_IsDllBlocked = "48 89 5C 24 08 48 89 6C 24 10 48 89 74 24 18 48 89 7C 24 20 41 56 48 83 EC 60 48";
     }
 
-    uintptr_t FindStringInST(std::string_view a_string);
     uintptr_t FindPatternInST(std::string_view a_pattern);
 }
