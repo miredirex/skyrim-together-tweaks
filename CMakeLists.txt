@@ -82,8 +82,8 @@ project(
 )
 
 configure_file(
-	${CMAKE_CURRENT_SOURCE_DIR}/cmake/Version.h.in
-	${CMAKE_CURRENT_BINARY_DIR}/include/Version.h
+	${CMAKE_CURRENT_SOURCE_DIR}/cmake/Plugin.h.in
+	${CMAKE_CURRENT_BINARY_DIR}/include/Plugin.h
 	@ONLY
 )
 
@@ -158,7 +158,7 @@ source_group(
 	TREE
 		${CMAKE_CURRENT_BINARY_DIR}
 	FILES
-		${CMAKE_CURRENT_BINARY_DIR}/include/Version.h
+		${CMAKE_CURRENT_BINARY_DIR}/include/Plugin.h
 )
 
 # ---- Create DLL ----
@@ -168,7 +168,7 @@ add_library(
 	SHARED
 	${headers}
 	${sources}
-	${CMAKE_CURRENT_BINARY_DIR}/include/Version.h
+	${CMAKE_CURRENT_BINARY_DIR}/include/Plugin.h
 	${CMAKE_CURRENT_BINARY_DIR}/version.rc
 	.clang-format
 	.editorconfig

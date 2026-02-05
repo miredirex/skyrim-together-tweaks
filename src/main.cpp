@@ -1,5 +1,6 @@
 #include "Hooks.h"
 #include "Settings.h"
+#include "tweaks/EnableConsole.h"
 #include <iostream>
 
 bool g_preloaded = false;
@@ -21,8 +22,8 @@ void OnInit(SKSE::MessagingInterface::Message* a_msg)
 extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
 {
     SKSE::PluginVersionData v;
-    v.PluginVersion({ Version::MAJOR, Version::MINOR, Version::PATCH });
-    v.PluginName(Version::PROJECT);
+    v.PluginVersion({ Plugin::MAJOR, Plugin::MINOR, Plugin::PATCH });
+    v.PluginName(Plugin::NAME);
     v.AuthorName("miredirex");
     v.UsesAddressLibrary();
     v.UsesUpdatedStructs();
@@ -39,31 +40,8 @@ void InitializeLog()
         stl::report_and_fail("Failed to find standard logging directory"sv);
     }
 
-    *path /= fmt::format(FMT_STRING("{}.log"), Version::PROJECT);
-    auto file_sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
-    auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-
-    auto log = std::make_shared<spdlog::logger>("global log"s, spdlog::sinks_init_list{ file_sink, console_sink });
-
-    log->set_level(spdlog::level::info);
-    log->flush_on(spdlog::level::info);
-
-    spdlog::set_default_logger(std::move(log));
-    spdlog::set_pattern("[%H:%M:%S] %v");
-
-    logger::info(FMT_STRING("{} v{}"), Version::PROJECT, Version::NAME);
-}
-
-static void AllocSkyrimTogetherConsole()
-{
-    if (AllocConsole())
-    {
-        FILE* file = nullptr;
-        freopen_s(&file, "CONOUT$", "w", stdout);
-        assert(file != nullptr);
-        SetConsoleTitleA("Skyrim Together Console");
-        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
-    }
+    *path /= fmt::format(FMT_STRING("{}.log"), Plugin::NAME);
+    logger::info(FMT_STRING("{} v{}"), Plugin::NAME, Plugin::VERSION_STRING);
 }
 
 extern "C" __declspec(dllexport) void __stdcall Initialize()
@@ -71,11 +49,11 @@ extern "C" __declspec(dllexport) void __stdcall Initialize()
     settings::Load();
     if (settings::bEnableConsole.GetValue())
     {
-        AllocSkyrimTogetherConsole();
+        EnableConsole::Install();
     }
 
     InitializeLog();
-    logger::info("SkyrimTogetherTweaks v{}.{}.{} PreLoad"sv, Version::MAJOR, Version::MINOR, Version::PATCH);
+    logger::info("SkyrimTogetherTweaks v{}.{}.{} PreLoad"sv, Plugin::MAJOR, Plugin::MINOR, Plugin::PATCH);
 
     auto& trampoline = SKSE::GetTrampoline();
     trampoline.create(1 << 7, reinterpret_cast<void*>(0x18FFFFFFF)); // "displacement is out of range" if I don't provide `0x18FFFFFFF`

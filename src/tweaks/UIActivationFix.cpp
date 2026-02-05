@@ -64,7 +64,7 @@ void UIActivationFix::Install()
 {
     if (!settings::bEnableF2Fix.GetValue())
     {
-        spdlog::info("{}.toml: bEnableF2Fix is set to false, not installing fix", Version::PROJECT);
+        spdlog::info("{}.toml: bEnableF2Fix is set to false, not installing fix", Plugin::NAME);
         return;
     }
 
@@ -90,5 +90,5 @@ void UIActivationFix::Install()
         AddVectoredExceptionHandler(1, UiFixVectoredExceptionHandler);
     }
 
-    spdlog::info("Installed UI activation fix");
+    spdlog::info("{}: installed UI activation fix", Plugin::NAME);
 }
