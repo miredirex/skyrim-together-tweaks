@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Hooks
+namespace hooks
 {
     void InstallPreloadHooks();
     void Install();

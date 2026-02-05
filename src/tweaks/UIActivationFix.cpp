@@ -1,5 +1,6 @@
 #include "UIActivationFix.h"
 #include "MemoryScan.h"
+#include "Settings.h"
 
 struct ApplyNvidiaFix
 {
@@ -61,9 +62,13 @@ LONG WINAPI UiFixVectoredExceptionHandler(PEXCEPTION_POINTERS pExceptionInfo)
 
 void UIActivationFix::Install()
 {
+    if (!settings::bEnableF2Fix.GetValue())
+    {
+        spdlog::info("{}.toml: bEnableF2Fix is set to false, not installing fix", Version::PROJECT);
+        return;
+    }
+
     g_startTime = GetTickCount64();
-    // TODO: TOML setting `bEnableF2Fix`
-    // TODO: `FindPatternInST` sometimes hangs, investigate
 
     auto& trampoline = SKSE::GetTrampoline();
 

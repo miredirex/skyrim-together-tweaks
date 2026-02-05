@@ -1,7 +1,7 @@
 #include "Hooks.h"
 #include "tweaks/UIActivationFix.h"
 
-namespace Hooks
+namespace hooks
 {
     void InstallPreloadHooks()
     {

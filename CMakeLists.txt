@@ -106,6 +106,7 @@ endif()
 
 add_compile_definitions(
 	SKSE_SUPPORT_XBYAK
+	REX_OPTION_TOML
 )
 
 if (MSVC)

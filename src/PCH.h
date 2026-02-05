@@ -4,9 +4,10 @@
 #define NOMINMAX
 #define DIRECTINPUT_VERSION 0x0800
 
-#include "RE/Skyrim.h"
-#include "REX/REX/Singleton.h"
-#include "SKSE/SKSE.h"
+#include <RE/Skyrim.h>
+#include <REX/REX/Singleton.h>
+#include <REX/REX/TOML.h>
+#include <SKSE/SKSE.h>
 
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/sinks/stdout_color_sinks.h>

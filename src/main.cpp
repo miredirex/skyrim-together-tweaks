@@ -1,4 +1,5 @@
 #include "Hooks.h"
+#include "Settings.h"
 #include <iostream>
 
 bool g_preloaded = false;
@@ -67,7 +68,8 @@ static void AllocSkyrimTogetherConsole()
 
 extern "C" __declspec(dllexport) void __stdcall Initialize()
 {
-    if (false /*true*/) // TODO: TOML setting `bEnableConsole`, and TODO: check if ST in release mode
+    settings::Load();
+    if (settings::bEnableConsole.GetValue())
     {
         AllocSkyrimTogetherConsole();
     }
@@ -77,13 +79,15 @@ extern "C" __declspec(dllexport) void __stdcall Initialize()
 
     auto& trampoline = SKSE::GetTrampoline();
     trampoline.create(1 << 7, reinterpret_cast<void*>(0x18FFFFFFF)); // "displacement is out of range" if I don't provide `0x18FFFFFFF`
-    Hooks::InstallPreloadHooks();
+
+    hooks::InstallPreloadHooks();
 
     g_preloaded = true;
 }
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
+    // TODO: preload fail msg
 #if 0
     if (!g_preloaded)
     {
@@ -99,14 +103,10 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
     }
 #endif
 
-    // InitializeLog();
+    SKSE::Init(a_skse, false);
 
-    // SKSE::Init(a_skse, false);
-    // SKSE::AllocTrampoline(1 << 7);
-    (void*)a_skse;
-
-    // const auto messaging = SKSE::GetMessagingInterface();
-    // messaging->RegisterListener("SKSE", OnInit);
+    const auto messaging = SKSE::GetMessagingInterface();
+    messaging->RegisterListener("SKSE", OnInit);
 
     return true;
 }
