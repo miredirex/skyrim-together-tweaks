@@ -35,7 +35,7 @@ inline ULONGLONG GetSecondsElapsed() { return (GetTickCount64() - g_startTime) /
 LONG WINAPI UiFixVectoredExceptionHandler(PEXCEPTION_POINTERS pExceptionInfo)
 {
     auto isNvCameraPresent = static_cast<bool>(GetModuleHandleW(L"NvCamera64.dll"));
-    auto isEarlyCrash = GetSecondsElapsed() < 10;
+    auto isEarlyCrash = GetSecondsElapsed() < 5;
 
     if (!isNvCameraPresent || !isEarlyCrash)
     {
