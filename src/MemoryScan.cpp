@@ -47,8 +47,13 @@ const uint8_t* ScanRegion(const uint8_t* start, const uint8_t* end, const std::v
 
 uintptr_t memscan::FindPatternInST(std::string_view a_pattern)
 {
-    uint8_t* startAddr = reinterpret_cast<uint8_t*>(0x180000000);
-    uint8_t* endAddr = reinterpret_cast<uint8_t*>(0x18FFFFFFF);
+    return memscan::FindPattern(a_pattern, 0x180000000); // SkyrimTogether.exe has ASLR disabled
+}
+
+uintptr_t memscan::FindPattern(std::string_view a_pattern, uintptr_t a_start)
+{
+    uint8_t* startAddr = reinterpret_cast<uint8_t*>(a_start);
+    uint8_t* endAddr = reinterpret_cast<uint8_t*>(a_start + 0xFFFFFFF); // FIXME: fine for now?
 
     auto pattern = ParsePattern(a_pattern);
     if (pattern.empty())

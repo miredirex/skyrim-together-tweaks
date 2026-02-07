@@ -1,5 +1,6 @@
 #include "Hooks.h"
 #include "tweaks/UIActivationFix.h"
+#include "tweaks/FixCrashLogger.h"
 
 namespace hooks
 {
@@ -10,6 +11,6 @@ namespace hooks
 
     void Install()
     {
-        // ...
+        FixCrashLogger::Install();
     }
 }

@@ -11,7 +11,8 @@ void OnInit(SKSE::MessagingInterface::Message* a_msg)
     {
     case SKSE::MessagingInterface::kPostLoad:
         {
-            spdlog::info("kPostLoad message");
+            hooks::Install();
+            MH_EnableHook(MH_ALL_HOOKS);
         }
         break;
     default:
@@ -80,6 +81,8 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
         return false;
     }
 #endif
+
+    MH_Initialize();
 
     SKSE::Init(a_skse, false);
 

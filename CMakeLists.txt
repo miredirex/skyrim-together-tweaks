@@ -132,6 +132,8 @@ else ()
 	)
 endif()
 
+find_package(minhook CONFIG REQUIRED)
+
 # ---- Add source files ----
 
 file(GLOB_RECURSE headers
@@ -197,6 +199,7 @@ target_link_libraries(
 	${PROJECT_NAME}
 	PRIVATE
 		${CommonLibName}::${CommonLibName}
+		minhook::minhook
 )
 
 target_precompile_headers(

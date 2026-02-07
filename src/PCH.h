@@ -13,6 +13,8 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <xbyak/xbyak.h>
 
+#include <MinHook.h>
+
 #define DLLEXPORT __declspec(dllexport)
 
 using namespace std::literals;
@@ -79,6 +81,16 @@ namespace stl
 
         return enum_range;
     };
+}
+
+template <typename T>
+MH_STATUS MH_CreateHookTyped(uintptr_t target, T* detour, T** original)
+{
+    return MH_CreateHook(
+        reinterpret_cast<void*>(target),
+        reinterpret_cast<void*>(detour), 
+        reinterpret_cast<void**>(original)
+    );
 }
 
 #ifdef SKYRIM_AE
