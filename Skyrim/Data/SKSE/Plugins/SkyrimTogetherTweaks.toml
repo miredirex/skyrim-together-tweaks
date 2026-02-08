@@ -1,8 +1,7 @@
-# Various tweaks and utilities for Skyrim Together 1.8.0+
+# Various tweaks and utilities for Skyrim Together 1.8.x
 
 [General]
 bEnableF2Fix = true           # enforces reliable UI activation, may require disabling Nvidia Photo Mode
-bFixCrashLogger = true        # patches CrashLoggerSSE (if detected) in order to fix stack backtraces
 uUiKeyCode = 0x71             # changes UI activation key; to remap, see https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 bEnableConsole = false        # enables the console where Skyrim Together prints debug logs
 bDisableRCtrl = false         # disables Right Ctrl button from activating the UI menu

@@ -75,9 +75,10 @@ namespace stl
         auto enum_range =
             std::views::iota(
                 std::to_underlying(first),
-                std::to_underlying(last)) |
+                std::to_underlying(last)
+            ) |
             std::views::transform([](auto enum_val)
-                { return (decltype(first))enum_val; });
+                                  { return (decltype(first))enum_val; });
 
         return enum_range;
     };
@@ -88,7 +89,7 @@ MH_STATUS MH_CreateHookTyped(uintptr_t target, T* detour, T** original)
 {
     return MH_CreateHook(
         reinterpret_cast<void*>(target),
-        reinterpret_cast<void*>(detour), 
+        reinterpret_cast<void*>(detour),
         reinterpret_cast<void**>(original)
     );
 }

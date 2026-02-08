@@ -10,7 +10,7 @@ struct Frame
 
 struct Callstack
 {
-    uint8_t pad0[0x18];
+    uint8_t                pad0[0x18];
     std::span<Frame const> frames;
 };
 
@@ -58,7 +58,8 @@ void FixCrashLogger::Install()
     MH_STATUS status = MH_CreateHookTyped(
         addrPrintCallStack,
         CrashLoggerPrintProbableCallstack::hook,
-        &CrashLoggerPrintProbableCallstack::real);
+        &CrashLoggerPrintProbableCallstack::real
+    );
 
     if (status != MH_OK)
     {

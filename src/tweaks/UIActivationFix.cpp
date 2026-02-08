@@ -51,7 +51,8 @@ LONG WINAPI UiFixVectoredExceptionHandler(PEXCEPTION_POINTERS pExceptionInfo)
             L"Skyrim Together has crashed. Please disable \"Game filters and Photo mode\" in the"
             " NVIDIA App/GeForce Experience and try again. Photo mode is also known as NVIDIA Ansel or NvCamera64.dll",
             L"Skyrim Together Tweaks",
-            MB_OK);
+            MB_OK
+        );
 
         if (res == IDOK)
             TerminateProcess(GetCurrentProcess(), 1);
