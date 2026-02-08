@@ -14,8 +14,8 @@ Nexus Mods page: https://www.nexusmods.com/skyrimspecialedition/mods/135782
 
 ## Building
 
-### AE
-```
+```pwsh
+$env:SkyrimAEPath = "S:\SteamLibrary\steamapps\common\Skyrim Special Edition\Data"
 cmake --preset vs2022-windows-vcpkg-ae
 cmake --build buildae --config Release
 ```
