@@ -65,7 +65,7 @@ void UIActivationFix::Install()
 {
     if (!settings::bEnableF2Fix.GetValue())
     {
-        spdlog::info("{}.toml: bEnableF2Fix is set to false, not installing fix", Plugin::NAME);
+        spdlog::info("{}.ini: bEnableF2Fix is set to false, not installing fix", Plugin::NAME);
         return;
     }
 

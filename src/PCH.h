@@ -6,7 +6,6 @@
 
 #include <RE/Skyrim.h>
 #include <REX/REX/Singleton.h>
-#include <REX/REX/TOML.h>
 #include <SKSE/SKSE.h>
 
 #include <spdlog/sinks/basic_file_sink.h>
