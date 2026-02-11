@@ -71,18 +71,16 @@ void UIActivationFix::Install()
 
     g_startTime = GetTickCount64();
 
-    auto& trampoline = SKSE::GetTrampoline();
-
     uintptr_t addrApplyNvidiaFix = memscan::FindPatternInST(memscan::aob::TiltedOnlineApp_ApplyNvidiaFix);
     if (addrApplyNvidiaFix)
     {
-        trampoline.write_branch<5>(addrApplyNvidiaFix, ApplyNvidiaFix::hook);
+        MH_CreateHookTyped(addrApplyNvidiaFix, ApplyNvidiaFix::hook);
     }
 
     uintptr_t addrIsDllBlocked = memscan::FindPatternInST(memscan::aob::DllBlocklist_IsDllBlocked);
     if (addrIsDllBlocked)
     {
-        trampoline.write_branch<5>(addrIsDllBlocked, IsDllBlocked::hook);
+        MH_CreateHookTyped(addrIsDllBlocked, IsDllBlocked::hook);
     }
 
     // Install the exception handler only if we hooked successfully

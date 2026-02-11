@@ -56,9 +56,7 @@ extern "C" __declspec(dllexport) void __stdcall Initialize()
     InitializeLog();
     logger::info("SkyrimTogetherTweaks v{}.{}.{} PreLoad"sv, Plugin::MAJOR, Plugin::MINOR, Plugin::PATCH);
 
-    auto& trampoline = SKSE::GetTrampoline();
-    trampoline.create(1 << 7, reinterpret_cast<void*>(0x18FFFFFFF)); // "displacement is out of range" if I don't provide `0x18FFFFFFF`
-
+    MH_Initialize();
     hooks::InstallPreloadHooks();
 
     g_preloaded = true;
@@ -81,8 +79,6 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
         return false;
     }
 #endif
-
-    MH_Initialize();
 
     SKSE::Init(a_skse, false);
 
