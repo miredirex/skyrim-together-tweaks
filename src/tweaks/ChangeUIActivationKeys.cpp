@@ -1,7 +1,5 @@
-#include "ChangeUIActivationKeys.h"
-#include "MemoryScan.h"
 #include "ScopedMemoryWrite.h"
-#include "Settings.h"
+#include "Tweaks.h"
 #include "util/VkToDik.h"
 #include <format>
 

@@ -1,7 +1,5 @@
-#include "InterpolationBufferMs.h"
-#include "MemoryScan.h"
 #include "ScopedMemoryWrite.h"
-#include "Settings.h"
+#include "Tweaks.h"
 
 const uint32_t DEFAULT_MS_IN_SKYRIM_TOGETHER = 300;
 

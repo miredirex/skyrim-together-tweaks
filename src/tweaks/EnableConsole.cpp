@@ -1,5 +1,4 @@
-#include "EnableConsole.h"
-#include "MemoryScan.h"
+#include "Tweaks.h"
 
 static void SpawnSkyrimTogetherConsole()
 {

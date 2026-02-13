@@ -17,7 +17,7 @@ namespace settings
     // [Experimental]
     static REX::INI::U32  uInterpolationBufferMs("Experimental", "uInterpolationBufferMs", 300);
     static REX::INI::Bool bNoAnimationDelay("Experimental", "bNoAnimationDelay", false);
-    static REX::INI::F32  bMobsAggroMultiplier("Experimental", "bMobsAggroMultiplier", false);
+    static REX::INI::F32  fMobsAggroMultiplier("Experimental", "fMobsAggroMultiplier", 1.0f);
 
     inline void Load()
     {

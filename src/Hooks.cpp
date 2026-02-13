@@ -1,10 +1,5 @@
 #include "Hooks.h"
-#include "tweaks/ChangeDebugMenuKey.h"
-#include "tweaks/ChangeUIActivationKeys.h"
-#include "tweaks/FixCrashLogger.h"
-#include "tweaks/InterpolationBufferMs.h"
-#include "tweaks/NoAnimationDelay.h"
-#include "tweaks/UIActivationFix.h"
+#include "tweaks/Tweaks.h"
 
 namespace hooks
 {

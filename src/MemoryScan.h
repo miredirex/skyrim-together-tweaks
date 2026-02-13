@@ -1,4 +1,4 @@
-#include "PCH.h"
+#pragma once
 
 namespace memscan
 {

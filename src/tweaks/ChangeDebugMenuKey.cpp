@@ -1,7 +1,6 @@
-#include "ChangeDebugMenuKey.h"
-#include "MemoryScan.h"
 #include "ScopedMemoryWrite.h"
 #include "Settings.h"
+#include "Tweaks.h"
 
 void ChangeDebugMenuKey::Install()
 {

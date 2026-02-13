@@ -1,7 +1,5 @@
-#include "NoAnimationDelay.h"
-#include "MemoryScan.h"
-#include "Settings.h"
 #include "ScopedMemoryWrite.h"
+#include "Tweaks.h"
 
 void NoAnimationDelay::Install()
 {

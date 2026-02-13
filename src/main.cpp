@@ -1,6 +1,6 @@
 #include "Hooks.h"
 #include "Settings.h"
-#include "tweaks/EnableConsole.h"
+#include "tweaks/Tweaks.h"
 #include <iostream>
 
 bool g_preloaded = false;

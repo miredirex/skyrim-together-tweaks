@@ -1,6 +1,4 @@
-#include "FixCrashLogger.h"
-#include "MemoryScan.h"
-#include "Settings.h"
+#include "Tweaks.h"
 #include <algorithm>
 
 struct Frame

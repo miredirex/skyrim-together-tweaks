@@ -37,3 +37,5 @@ MH_STATUS MH_CreateHookTyped(uintptr_t target, T* detour, T** original = nullptr
 }
 
 #include "Plugin.h"
+#include "MemoryScan.h"
+#include "Settings.h"
