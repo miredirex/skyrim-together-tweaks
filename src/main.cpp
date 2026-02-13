@@ -64,12 +64,10 @@ extern "C" __declspec(dllexport) void __stdcall Initialize()
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
 {
-    // TODO: preload fail msg
-#if 0
     if (!g_preloaded)
     {
         std::wostringstream messageBoxText;
-        messageBoxText << L"ERROR: Skyrim Together Tweaks did not pre-load. Please verify the installation of d3dx9_42.dll from the Engine Fixes' Part 2. This file must reside in the main game folder alongside SkyrimSE.exe, or be properly installed with your mod manager's root folder functionality.\r\n"sv;
+        messageBoxText << L"ERROR: Skyrim Together Tweaks did not pre-load. Please verify the installation of d3dx9_42.dll from the Part 2 of SSE Engine Fixes. This file must reside in the main game folder alongside SkyrimSE.exe, or be properly installed with your mod manager's root folder functionality.\r\n\r\n"sv;
         messageBoxText << L"Skyrim will now close.";
         REX::W32::MessageBoxW(nullptr, messageBoxText.str().c_str(), L"Skyrim Together Tweaks", MB_OK);
 
@@ -78,7 +76,6 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_s
 
         return false;
     }
-#endif
 
     SKSE::Init(a_skse, false);
 
