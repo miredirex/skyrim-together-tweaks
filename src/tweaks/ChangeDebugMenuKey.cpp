@@ -1,7 +1,7 @@
 #include "ChangeDebugMenuKey.h"
-#include "Settings.h"
 #include "MemoryScan.h"
 #include "ScopedMemoryWrite.h"
+#include "Settings.h"
 
 void ChangeDebugMenuKey::Install()
 {
@@ -21,8 +21,8 @@ void ChangeDebugMenuKey::Install()
     }
 
     uint32_t* debugKeyCodeValue = reinterpret_cast<uint32_t*>(f3KeyStateInst + 1);
-    ScopedMemoryWrite _{ debugKeyCodeValue, 8 };
 
+    ScopedMemoryWrite _{ debugKeyCodeValue, 8 };
     *debugKeyCodeValue = vkDebugKeyCode;
 
     spdlog::info("{}: installed debug menu key tweak", Plugin::NAME);
