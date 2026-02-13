@@ -31,7 +31,7 @@ struct CrashLoggerPrintProbableCallstack
 };
 
 // Trying to solve https://discord.com/channels/247835175860305931/717070423254368286/1375140709132275742
-// TODO: ...but not working, the problem is probably elsewhere
+// TODO: ...but it's not working, the issue is probably elsewhere
 void FixCrashLogger::Install()
 {
 #if 0

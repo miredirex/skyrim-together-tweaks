@@ -28,7 +28,7 @@ void ChangeUIActivationKeys::Install()
     if (!addrDInputHookGet || !addrSetToggleKeys)
     {
         auto err = std::format(
-            "Either DInputHook_Get or DInputHook_SetToggleKeys wasn't found: {} or {}, exiting",
+            "Neither DInputHook_Get nor DInputHook_SetToggleKeys pattern was found: {} or {}. Exiting",
             memscan::aob::DInputHook_Get,
             memscan::aob::DInputHook_SetToggleKeys
         );
