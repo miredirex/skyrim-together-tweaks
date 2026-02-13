@@ -14,10 +14,10 @@ namespace settings
     static REX::INI::U32  uDebugMenuKeyCode("Keys", "uDebugMenuKeyCode", 0x72);
     static REX::INI::Bool bDisableRCtrl("Keys", "bDisableRCtrl", false);
 
-    // [Experiments]
-    static REX::INI::U32  uInterpolationBufferMs("Experiments", "uInterpolationBufferMs", 300);
-    static REX::INI::Bool bNoAnimationDelay("Experiments", "bNoAnimationDelay", false);
-    static REX::INI::F32  bMobsAggroMultiplier("Experiments", "bMobsAggroMultiplier", false);
+    // [Experimental]
+    static REX::INI::U32  uInterpolationBufferMs("Experimental", "uInterpolationBufferMs", 300);
+    static REX::INI::Bool bNoAnimationDelay("Experimental", "bNoAnimationDelay", false);
+    static REX::INI::F32  bMobsAggroMultiplier("Experimental", "bMobsAggroMultiplier", false);
 
     inline void Load()
     {

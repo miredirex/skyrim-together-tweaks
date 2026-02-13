@@ -3,6 +3,7 @@
 #include "tweaks/ChangeUIActivationKeys.h"
 #include "tweaks/FixCrashLogger.h"
 #include "tweaks/InterpolationBufferMs.h"
+#include "tweaks/NoAnimationDelay.h"
 #include "tweaks/UIActivationFix.h"
 
 namespace hooks
@@ -18,5 +19,6 @@ namespace hooks
         ChangeUIActivationKeys::Install();
         ChangeDebugMenuKey::Install();
         InterpolationBufferMs::Install();
+        NoAnimationDelay::Install();
     }
 }

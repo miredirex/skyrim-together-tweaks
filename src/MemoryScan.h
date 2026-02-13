@@ -19,9 +19,10 @@ namespace memscan
         // if ( v8 == 0xA3 || v8 == 0x71 )
         const std::string_view InputService_ProcessKeyboard_KeysIf = "41 3B C5 74 14 83 F8 71 74 0F 66 83 FB 1B";
         // if (GetAsyncKeyState(VK_F3) & 0x01)
-        const std::string_view DebugService_OnUpdate_F3KeyState = "B9 72 00 00 00 FF 15 ?? ?? ?? ?? A8 01 74 08";
+        const std::string_view DebugService_OnUpdate_F3KeyState = "B9 72 00 00 00 FF 15 ?? ?? ?? ?? A8 01 74";
 
         const std::string_view CharacterService_RunRemoteUpdates_tick = "48 2D 2C 01 00 00 48 89 45 A0 49 8B 5D 00";
+        const std::string_view AnimationSystem_Update_tickCmp = "4C 39 4D 10 0F 87 ?? ?? ?? ?? 48 8D";
 
         const std::string_view CrashLogger_print_probable_callstack = "40 53 56 57 41 54 41 55 41 56 41 57 48 81 EC 20 02 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 10 02 00 00 4C";
     }
