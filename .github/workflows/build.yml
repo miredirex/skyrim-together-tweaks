@@ -26,15 +26,18 @@ jobs:
         run: echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
         shell: bash
 
+      - name: Extract version
+        run: |
+          MOD_VERSION=$(jq -r '."version-string"' vcpkg.json)
+          echo "MOD_VERSION=$MOD_VERSION" >> $GITHUB_ENV
+          echo "Version: $MOD_VERSION"
+        shell: bash
+
       - name: Configure CMake
         run: cmake --preset vs2022-windows-vcpkg-ae
 
       - name: Build
         run: cmake --build buildae --config Release
-
-      - name: Extract version
-        run: echo "MOD_VERSION=$(jq -r '."version-string"' vcpkg.json)" >> $GITHUB_ENV
-        shell: bash
 
       - name: Stage artifact
         run: |
