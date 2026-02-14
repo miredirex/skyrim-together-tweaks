@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+\.[0-9]+\.[0-9]+'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: Setup vcpkg
+        run: |
+          git clone https://github.com/microsoft/vcpkg.git ${{ github.workspace }}/vcpkg
+          ${{ github.workspace }}/vcpkg/bootstrap-vcpkg.bat
+        shell: cmd
+
+      - name: Set VCPKG_ROOT
+        run: echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Configure CMake
+        run: cmake --preset vs2022-windows-vcpkg-ae
+
+      - name: Build
+        run: cmake --build buildae --config Release
+
+      - name: Extract version
+        run: echo "MOD_VERSION=$(jq -r '."version-string"' vcpkg.json)" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Stage artifact
+        run: |
+          mkdir -p artifact/SKSE/Plugins
+          cp buildae/Release/SkyrimTogetherTweaks.dll artifact/SKSE/Plugins/
+          cp buildae/Release/SkyrimTogetherTweaks.pdb artifact/SKSE/Plugins/
+          cp Skyrim/Data/SKSE/Plugins/* artifact/SKSE/Plugins/
+        shell: bash
+
+      - name: Upload DLL and PDB
+        uses: actions/upload-artifact@v6
+        with:
+          name: Skyrim Together Tweaks (v${{ env.MOD_VERSION }})
+          path: artifact/*
