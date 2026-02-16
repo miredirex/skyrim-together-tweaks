@@ -50,6 +50,32 @@ uintptr_t memscan::FindPatternInST(std::string_view a_pattern)
     return memscan::FindPattern(a_pattern, 0x180000000); // SkyrimTogether.exe has ASLR disabled
 }
 
+static std::string StringToAOB(std::string_view a_string)
+{
+    static constexpr char hexDigits[] = "0123456789ABCDEF";
+    std::string           result;
+    result.reserve(a_string.size() * 3);
+
+    for (size_t i = 0; i < a_string.size(); ++i)
+    {
+        if (i > 0)
+            result += ' ';
+        uint8_t byte = static_cast<uint8_t>(a_string[i]);
+        result += hexDigits[byte >> 4];
+        result += hexDigits[byte & 0x0F];
+    }
+
+    return result;
+}
+
+uintptr_t memscan::FindString(std::string_view a_string, uintptr_t a_start)
+{
+    if (a_string.empty())
+        return 0;
+
+    return memscan::FindPattern(StringToAOB(a_string), a_start);
+}
+
 uintptr_t memscan::FindPattern(std::string_view a_pattern, uintptr_t a_start)
 {
     uint8_t* startAddr = reinterpret_cast<uint8_t*>(a_start);

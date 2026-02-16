@@ -24,9 +24,10 @@ namespace memscan
         const std::string_view CharacterService_RunRemoteUpdates_tick = "48 2D 2C 01 00 00 48 89 45 A0 49 8B 5D 00";
         const std::string_view AnimationSystem_Update_tickCmp = "4C 39 4D 10 0F 87 ?? ?? ?? ?? 48 8D";
 
-        const std::string_view CrashLogger_print_probable_callstack = "40 53 56 57 41 54 41 55 41 56 41 57 48 81 EC 20 02 00 00 48 8B 05 ?? ?? ?? ?? 48 33 C4 48 89 84 24 10 02 00 00 4C";
+        const std::string_view CrashLogger_log_common_header_info = "48 89 5C 24 20 55 56 57 41 56 41 57 48 8D 6C";
     }
 
     uintptr_t FindPatternInST(std::string_view a_pattern);
     uintptr_t FindPattern(std::string_view a_pattern, uintptr_t a_start);
+    uintptr_t FindString(std::string_view a_string, uintptr_t a_start);
 }

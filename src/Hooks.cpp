@@ -10,7 +10,7 @@ namespace hooks
 
     void Install()
     {
-        FixCrashLogger::Install(); // Doesn't do anything as of now
+        AppendVersionInCrashLogs::Install(); // Doesn't do anything as of now
         ChangeUIActivationKeys::Install();
         ChangeDebugMenuKey::Install();
         InterpolationBufferMs::Install();

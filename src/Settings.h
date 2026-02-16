@@ -7,7 +7,7 @@ namespace settings
     // [General]
     static REX::INI::Bool bEnableF2Fix("General", "bEnableF2Fix", true);
     static REX::INI::Bool bEnableConsole("General", "bEnableConsole", false);
-    // static REX::INI::Bool bFixCrashLogger("General", "bFixCrashLogger", true);
+    static REX::INI::Bool bAppendVersionInCrashLogs("General", "bAppendVersionInCrashLogs", true);
 
     // [Keys]
     static REX::INI::U32  uUiKeyCode("Keys", "uUiKeyCode", 0x71);
@@ -17,7 +17,6 @@ namespace settings
     // [Experimental]
     static REX::INI::U32  uInterpolationBufferMs("Experimental", "uInterpolationBufferMs", 300);
     static REX::INI::Bool bNoAnimationDelay("Experimental", "bNoAnimationDelay", false);
-    static REX::INI::F32  fMobsAggroMultiplier("Experimental", "fMobsAggroMultiplier", 1.0f);
 
     inline void Load()
     {
