@@ -1,7 +1,6 @@
 #include "Hooks.h"
 #include "Settings.h"
 #include "tweaks/Tweaks.h"
-#include <iostream>
 
 bool g_preloaded = false;
 
@@ -42,10 +41,14 @@ void InitializeLog()
     }
 
     *path /= fmt::format(FMT_STRING("{}.log"), Plugin::NAME);
-    auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
-    auto log = std::make_shared<spdlog::logger>("global log"s, std::move(sink));
+
+    auto fileSink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
+    auto consoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+    auto log = std::make_shared<spdlog::logger>("global log"s, spdlog::sinks_init_list{ fileSink, consoleSink });
 
     log->set_level(spdlog::level::info);
+    log->flush_on(spdlog::level::info);
+    spdlog::set_default_logger(std::move(log));
     spdlog::set_pattern("%^[%H:%M:%S] SkyrimTogetherTweaks:%$ %v");
 
     logger::info(FMT_STRING("{} v{}"), Plugin::NAME, Plugin::VERSION_STRING);
