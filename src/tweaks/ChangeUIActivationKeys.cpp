@@ -33,12 +33,7 @@ void ChangeUIActivationKeys::Install()
         stl::report_and_fail(err);
     }
 
-    spdlog::info(
-        "{}: installing activation keys tweak, key: {}; disabling right ctrl: {}",
-        Plugin::NAME,
-        vkKeyCode,
-        isRCtrlDisabled
-    );
+    logger::info("installing activation keys tweak, key: {}; disabling right ctrl: {}", vkKeyCode, isRCtrlDisabled);
 
     // Part 1: `SetToggleKeys(...)`
 
@@ -74,5 +69,5 @@ void ChangeUIActivationKeys::Install()
     uint8_t* f2KeyCheck = processKeyboardKeysIfInst + 5 + 2;
     *f2KeyCheck = static_cast<uint8_t>(vkKeyCode);
 
-    spdlog::info("{}: installed activation keys tweak", Plugin::NAME);
+    logger::info("installed activation keys tweak");
 }

@@ -23,7 +23,7 @@ void EnableConsole::Install()
 
     if (addrCtor && addrGlobalInstanceMovInst)
     {
-        spdlog::info("{}: installing EnableConsole tweak...", Plugin::NAME);
+        logger::info("installing EnableConsole tweak...");
 
         // Extract the 4-byte displacement (starts at index 3). Cast to int32_t because the offset can be negative
         int32_t displacement = *(int32_t*)(addrGlobalInstanceMovInst + 3);
@@ -37,6 +37,6 @@ void EnableConsole::Install()
 
         ctor(/* this = */ g_appInstance->get());
 
-        spdlog::info("{}: installed EnableConsole tweak", Plugin::NAME);
+        logger::info("installed EnableConsole tweak");
     }
 }

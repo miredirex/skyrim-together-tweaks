@@ -24,5 +24,5 @@ void ChangeDebugMenuKey::Install()
     ScopedMemoryWrite _{ debugKeyCodeValue, 8 };
     *debugKeyCodeValue = vkDebugKeyCode;
 
-    spdlog::info("{}: installed debug menu key tweak", Plugin::NAME);
+    logger::info("installed debug menu key tweak");
 }

@@ -22,5 +22,5 @@ void NoAnimationDelay::Install()
     ScopedMemoryWrite _{ tickCmpInst, 16 };
     std::memset(tickCmpInst, 0x90, 10); // No-op `cmp` and `ja` - 10 bytes total
 
-    spdlog::info("{}: installed no animation delay tweak", Plugin::NAME);
+    logger::info("installed no animation delay tweak");
 }

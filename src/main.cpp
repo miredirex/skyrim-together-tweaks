@@ -42,6 +42,12 @@ void InitializeLog()
     }
 
     *path /= fmt::format(FMT_STRING("{}.log"), Plugin::NAME);
+    auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
+    auto log = std::make_shared<spdlog::logger>("global log"s, std::move(sink));
+
+    log->set_level(spdlog::level::info);
+    spdlog::set_pattern("%^[%H:%M:%S] SkyrimTogetherTweaks:%$ %v");
+
     logger::info(FMT_STRING("{} v{}"), Plugin::NAME, Plugin::VERSION_STRING);
 }
 

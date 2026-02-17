@@ -31,9 +31,8 @@ void InterpolationBufferMs::Install()
     ScopedMemoryWrite _{ interpolationBufferMsValue, 8 };
     *interpolationBufferMsValue = desiredInterpolationBufferMs;
 
-    spdlog::info(
-        "{}: installed interpolation buffer tweak ({}ms -> {}ms)",
-        Plugin::NAME,
+    logger::info(
+        "installed interpolation buffer tweak ({}ms -> {}ms)",
         DEFAULT_MS_IN_SKYRIM_TOGETHER,
         desiredInterpolationBufferMs
     );

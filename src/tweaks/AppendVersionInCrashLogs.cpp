@@ -23,7 +23,7 @@ void AppendVersionInCrashLogs::Install()
     const HMODULE crashLoggerModule = GetModuleHandleW(L"CrashLogger.dll");
     if (!crashLoggerModule)
     {
-        spdlog::warn("{}: CrashLoggerSSE is not installed, skipping bAppendVersionInCrashLogs patch", Plugin::NAME);
+        logger::warn("CrashLoggerSSE is not installed, skipping bAppendVersionInCrashLogs patch");
         return;
     }
 
@@ -32,7 +32,7 @@ void AppendVersionInCrashLogs::Install()
 
     if (!addrLogHeaderInfo)
     {
-        spdlog::warn("{}: Couldn't find pattern for `log_common_header_info`, skipping bAppendVersionInCrashLogs patch", Plugin::NAME);
+        logger::warn("Couldn't find pattern for `log_common_header_info`, skipping bAppendVersionInCrashLogs patch");
         return;
     }
 
@@ -49,11 +49,11 @@ void AppendVersionInCrashLogs::Install()
 
     if (status == MH_OK)
     {
-        spdlog::info("{}: installed ST version in crash logs tweak", Plugin::NAME);
+        logger::info("installed ST version in crash logs tweak");
     }
     else
     {
-        spdlog::error("Failed to create hook to CrashLoggerSSE. MH_Status: {}", static_cast<uint8_t>(status));
+        logger::error("Failed to create hook to CrashLoggerSSE. MH_Status: {}", static_cast<uint8_t>(status));
     }
 #endif
 }
