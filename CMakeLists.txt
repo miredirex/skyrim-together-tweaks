@@ -186,7 +186,7 @@ if (MSVC)
 		PRIVATE
 			/sdl             # Enable Additional Security Checks
 			/utf-8           # Set Source and Executable character sets to UTF-8
-			/Z7              # Debug Information Format
+			/Zi              # Debug Information Format
 			/guard:cf        # Control Flow Guard
 
 			/permissive-     # Standards conformance
