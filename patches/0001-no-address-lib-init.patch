@@ -1,0 +1,13 @@
+diff --git a/src/SKSE/API.cpp b/src/SKSE/API.cpp
+index 4202ba80..113b1c17 100644
+--- a/src/SKSE/API.cpp
++++ b/src/SKSE/API.cpp
+@@ -81,7 +81,7 @@ namespace SKSE
+ 		}
+ 
+ 		(void)REL::Module::get();
+-		(void)REL::IDDatabase::get();
++		// (void)REL::IDDatabase::get(); - my mod does not use the address library so whatever
+ 
+ 		auto&       storage = detail::APIStorage::get();
+ 		const auto& intfc = *a_intfc;

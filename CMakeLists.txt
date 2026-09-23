@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 set(NAME "SkyrimTogetherTweaks" CACHE STRING "")
-set(VERSION 1.0.0 CACHE STRING "")
+set(VERSION 1.0.1 CACHE STRING "")
 
 # ---- Options ----
 
@@ -95,7 +95,10 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_DEBUG OFF)
 
 # ---- Dependencies ----
+include(cmake/GitPatch.cmake)
+
 if (DEFINED CommonLibPath AND NOT ${CommonLibPath} STREQUAL "" AND IS_DIRECTORY ${CommonLibPath})
+	git_apply_patch(${CommonLibPath} patches/0001-no-address-lib-init.patch)
 	add_subdirectory(${CommonLibPath} ${CommonLibName})
 else ()
 	message(

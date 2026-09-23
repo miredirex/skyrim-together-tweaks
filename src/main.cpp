@@ -25,9 +25,12 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []()
     v.PluginVersion({ Plugin::MAJOR, Plugin::MINOR, Plugin::PATCH });
     v.PluginName(Plugin::NAME);
     v.AuthorName("miredirex");
-    v.UsesAddressLibrary();
-    v.UsesUpdatedStructs();
-    v.CompatibleVersions({ SKSE::RUNTIME_SSE_LATEST });
+    v.UsesNoStructs();
+    v.CompatibleVersions({ 
+        REL::Version(1, 6, 1170, 0),
+        REL::Version(1, 6, 1179, 0),
+        REL::Version(1, 7, 104, 0)
+    });
 
     return v;
 }();
@@ -54,7 +57,7 @@ void InitializeLog()
     logger::info(FMT_STRING("{} v{}"), Plugin::NAME, Plugin::VERSION_STRING);
 }
 
-extern "C" __declspec(dllexport) void __stdcall Initialize()
+inline void RealInitialize()
 {
     settings::Load();
     if (settings::bEnableConsole.GetValue())
@@ -69,6 +72,19 @@ extern "C" __declspec(dllexport) void __stdcall Initialize()
     hooks::InstallPreloadHooks();
 
     g_preloaded = true;
+}
+
+// Old preloader (d3dx9_42.dll)
+extern "C" __declspec(dllexport) void __stdcall Initialize()
+{
+    RealInitialize();
+}
+
+// New SKSE-native preloader
+extern "C" [[maybe_unused]] __declspec(dllexport) bool SKSEPlugin_Preload(const struct SKSE_PreLoadInterface*)
+{
+    RealInitialize();
+    return true;
 }
 
 extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* a_skse)
