@@ -19,7 +19,11 @@ void EnableConsole::Install()
     SpawnSkyrimTogetherConsole();
 
     uintptr_t addrCtor = memscan::FindPatternInST(memscan::aob::TiltedOnlineApp_ctor);
+    if (!addrCtor)
+        addrCtor = memscan::FindPatternInST(memscan::aob::TiltedOnlineApp_ctor_v182);
     uintptr_t addrGlobalInstanceMovInst = memscan::FindPatternInST(memscan::aob::RunTiltedInit_g_appInstanceMov);
+    if (!addrGlobalInstanceMovInst)
+        addrGlobalInstanceMovInst = memscan::FindPatternInST(memscan::aob::RunTiltedInit_g_appInstanceMov_v182);
 
     if (addrCtor && addrGlobalInstanceMovInst)
     {
