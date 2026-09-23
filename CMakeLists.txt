@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 set(NAME "SkyrimTogetherTweaks" CACHE STRING "")
-set(VERSION 1.0.1 CACHE STRING "")
+set(VERSION 1.0.2 CACHE STRING "")
 
 # ---- Options ----
 
