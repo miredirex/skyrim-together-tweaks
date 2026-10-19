@@ -18,6 +18,9 @@ namespace memscan
         const std::string_view DInputHook_SetToggleKeys = "48 89 5C 24 10 48 89 74 24 18 48 89 7C 24 20 41 56 48 83 EC 40 4C 8B F2";
         const std::string_view DInputHook_SetToggleKeys_v180 = "48 89 5C 24 10 48 89 6C 24 18 48 89 4C 24 08 56 57 41 56 48 83 EC 50 48 8B FA 48 8B 05";
 
+        const std::string_view DInputHook_HookDirectInput8Create = "48 89 5C 24 ?? 48 89 6C 24 ?? 56 57 41 56 48 83 EC ?? 49 8B D9 49 8B F8";
+        const std::string_view DInputHook_HookIDirectInputA_CreateDevice = "48 89 5C 24 ?? 57 48 83 EC ?? 48 8B 05 ?? ?? ?? ?? 49 8B F8 FF D0 8B D8 85 C0";
+
         // if ( v8 == 0xA3 || v8 == 0x71 )
         const std::string_view InputService_ProcessKeyboard_KeysIf = "41 3B C5 74 14 83 F8 71 74 0F 66 83 FB 1B";
         // if (GetAsyncKeyState(VK_F3) & 0x01)

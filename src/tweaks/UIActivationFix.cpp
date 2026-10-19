@@ -1,4 +1,5 @@
 #include "Tweaks.h"
+#include "util/DInputStubs.h"
 
 struct ApplyNvidiaFix
 {
@@ -25,6 +26,40 @@ struct IsDllBlocked
         return false;
     }
 };
+
+util::TIDirectInputA_CreateDevice* g_stHookCreateDevice = nullptr;
+
+// Security software (e.g. Bitdefender) can replace IDirectInput8A::CreateDevice in the vtable so ST's hook on it never runs
+// and the UI never opens; wrapping the object and calling ST's hook directly avoids that
+struct HookDirectInput8Create
+{
+    static HRESULT WINAPI hook(HINSTANCE a_instance, DWORD a_version, REFIID a_iid, LPVOID* a_out, LPUNKNOWN a_outer)
+    {
+        const HRESULT result = original(a_instance, a_version, a_iid, a_out, a_outer);
+        if (result == DI_OK && *a_out && IsEqualIID(a_iid, util::kIID_IDirectInput8A))
+        {
+            *a_out = static_cast<IDirectInput8A*>(new util::DirectInput8AWrapper(static_cast<IDirectInput8A*>(*a_out), g_stHookCreateDevice));
+            logger::info("wrapped IDirectInput8A");
+        }
+        return result;
+    }
+
+    static inline decltype(&hook) original = nullptr;
+};
+
+static void InstallDirectInputWrapper()
+{
+    uintptr_t addrHookDirectInput8Create = memscan::FindPatternInST(memscan::aob::DInputHook_HookDirectInput8Create);
+    uintptr_t addrHookCreateDevice = memscan::FindPatternInST(memscan::aob::DInputHook_HookIDirectInputA_CreateDevice);
+    if (!addrHookDirectInput8Create || !addrHookCreateDevice)
+    {
+        logger::warn("DInputHook patterns weren't found, not installing the DirectInput wrapper");
+        return;
+    }
+
+    g_stHookCreateDevice = reinterpret_cast<util::TIDirectInputA_CreateDevice*>(addrHookCreateDevice);
+    MH_CreateHookTyped(addrHookDirectInput8Create, HookDirectInput8Create::hook, &HookDirectInput8Create::original);
+}
 
 uint64_t g_startTime = 0;
 
@@ -86,6 +121,8 @@ void UIActivationFix::Install()
     {
         AddVectoredExceptionHandler(1, UiFixVectoredExceptionHandler);
     }
+
+    InstallDirectInputWrapper();
 
     logger::info("installed UI activation fix");
 }
